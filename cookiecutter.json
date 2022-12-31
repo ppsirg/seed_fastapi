@@ -1,0 +1,7 @@
+{
+  "name": "myproject",
+  "description": "my project description",
+  "author": "my name",
+  "email": "my@email",
+  "database": "sqlite|file|postgres|mongodb"
+}
