@@ -1,10 +1,15 @@
 FROM python:3.11-slim-buster
 
-WORKDIR /usr/src/app
+LABEL org.opencontainers.image.authors="{{ cookiecutter.email }}"
 
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+WORKDIR /code
 
-COPY . .
+COPY ./requirements.txt /code/requirements.txt
 
-CMD [ "python", "./your-daemon-or-script.py" ]
+RUN pip install --upgrade pip
+
+RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
+
+COPY . /code/
+
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
